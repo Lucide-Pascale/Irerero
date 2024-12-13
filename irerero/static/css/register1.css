@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    width: 200px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 0;
+}
+
+.headteacher {
+    background-color: #4caf50;
+}
+
+.teacher {
+    background-color: #2196f3;
+}
+
+.parent {
+    background-color: #ff9800;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.login-message {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.login-message a {
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-message a:hover {
+    text-decoration: underline;
+}

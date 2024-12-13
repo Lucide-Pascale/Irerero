@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Account Type</title>
+    <!-- Using Django's static files -->
+    <link rel="stylesheet" href="{% static 'css/register1.css' %}">
+    <script src="{% static 'js/register.js' %}"></script>
+</head>
+<body>
+    <h1>Choose Your Account Type</h1>
+    <div class="card-container">
+        <a href="{% url 'register_schoolinfo' %}" class="card">
+            <div class="card-icon headteacher">
+                <img src="https://via.placeholder.com/50" alt="HeadTeacher Icon">
+            </div>
+            <h3>HeadTeacher</h3>
+        </a>
+        <a href="{#}" class="card">
+            <div class="card-icon teacher">
+                <img src="https://via.placeholder.com/50" alt="Teacher Icon">
+            </div>
+            <h3>Teacher</h3>
+        </a>
+        <a href="{#}" class="card">
+            <div class="card-icon parent">
+                <img src="https://via.placeholder.com/50" alt="Parent Icon">
+            </div>
+            <h3>Parent</h3>
+        </a>
+    </div>
+    <div class="login-message">
+        Do you already have an account? <a href="#">Log in</a>
+    </div>
+</body>
+</html>
