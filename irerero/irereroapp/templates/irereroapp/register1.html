@@ -18,13 +18,13 @@
             </div>
             <h3>HeadTeacher</h3>
         </a>
-        <a href="{#}" class="card">
+        <a href="{%url 'register_teacher' %}" class="card">
             <div class="card-icon teacher">
                 <img src="https://via.placeholder.com/50" alt="Teacher Icon">
             </div>
             <h3>Teacher</h3>
         </a>
-        <a href="{#}" class="card">
+        <a href="{%url 'register_parent'%}" class="card">
             <div class="card-icon parent">
                 <img src="https://via.placeholder.com/50" alt="Parent Icon">
             </div>
@@ -32,7 +32,7 @@
         </a>
     </div>
     <div class="login-message">
-        Do you already have an account? <a href="#">Log in</a>
+        Do you already have an account?  <a href="{%url 'login'%}">Log in</a>
     </div>
 </body>
 </html>

@@ -1,14 +1,53 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from .models import School
+from django.db import models
+from .models import School, User
 
 # Create your views here.
 def register(request):
 
     return render(request, 'irereroapp/register1.html')
 
+
+
 def register_headteacher(request):
-    return render(request, 'irereroapp/register_headteacher.html')
+     if request.method == 'POST':
+        # Get form data
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        idnumber = request.POST.get('idnumber')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        school_id = request.POST.get('school')
+        password = request.POST.get('password')
+        role = 'Headteacher'  # You can also modify this based on your logic
+
+        if User.objects.filter(email=email).exists():
+                return render(request, 'register_headteacher.html', {'error': 'Email already exists', 'schools': School.objects.all()})
+            
+            # Get the selected school object
+        school = School.objects.get(id=school_id)
+
+        # Create a new user object
+        user = User(
+            firstname=firstname,
+            lastname=lastname,
+            national_id=idnumber,
+            email=email,
+            phonenumber=contact,
+            school=school,
+            role=role,
+            password=make_password(password)  # Hash the password before storing
+        )
+        
+        # Save the user to the database
+        user.save()
+        
+        # Redirect to another page (e.g., a success page)
+        return redirect('register_schoolinfo')
+     schools = School.objects.all()
+     return render(request, 'irereroapp/register_headteacher.html',{'schools': schools})
 
 def register_schoolinfo(request):
      if request.method == 'POST':
@@ -42,3 +81,83 @@ def register_schoolinfo(request):
             return redirect('register_schoolinfo')
         
      return render(request, 'irereroapp/register_schoolinfo.html')
+
+def register_teacher(request):
+     if request.method == 'POST':
+        # Get form data
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        idnumber = request.POST.get('idnumber')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        school_id = request.POST.get('school')
+        password = request.POST.get('password')
+        role = 'Teacher'  # You can also modify this based on your logic
+
+        if User.objects.filter(email=email).exists():
+                return render(request, 'register_teacher.html', {'error': 'Email already exists', 'schools': School.objects.all()})
+            
+            # Get the selected school object
+        school = School.objects.get(id=school_id)
+
+        # Create a new user object
+        user = User(
+            firstname=firstname,
+            lastname=lastname,
+            national_id=idnumber,
+            email=email,
+            phonenumber=contact,
+            school=school,
+            role=role,
+            password=make_password(password)  # Hash the password before storing
+        )
+        
+        # Save the user to the database
+        user.save()
+        
+        # Redirect to another page (e.g., a success page)
+        return redirect('register_schoolinfo')
+     schools = School.objects.all()
+     return render(request, 'irereroapp/register_teacher.html',{'schools': schools})
+
+def register_parent(request):
+     if request.method == 'POST':
+        # Get form data
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        idnumber = request.POST.get('idnumber')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        school_id = request.POST.get('school')
+        password = request.POST.get('password')
+        role = 'Parent'  # You can also modify this based on your logic
+
+        if User.objects.filter(email=email).exists():
+                return render(request, 'register_parent.html', {'error': 'Email already exists', 'schools': School.objects.all()})
+            
+            # Get the selected school object
+        school = School.objects.get(id=school_id)
+
+        # Create a new user object
+        user = User(
+            firstname=firstname,
+            lastname=lastname,
+            national_id=idnumber,
+            email=email,
+            phonenumber=contact,
+            school=school,
+            role=role,
+            password=make_password(password)  # Hash the password before storing
+        )
+        
+        # Save the user to the database
+        user.save()
+        
+        # Redirect to another page (e.g., a success page)
+        return redirect('register_schoolinfo')
+     schools = School.objects.all()
+     return render(request, 'irereroapp/register_parent.html',{'schools': schools})
+
+def login(request):
+    
+    return render(request, 'irereroapp/login.html')

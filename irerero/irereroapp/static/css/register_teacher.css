@@ -118,3 +118,19 @@ button:hover {
 .back-button:hover {
     background-color: #5a6268;
 }
+/* Increase the size of the dropdown */
+select {
+    width: 300px; /* Adjust the width */
+    height: 40px; /* Adjust the height */
+    font-size: 16px; /* Make the text bigger */
+    padding: 5px 10px; /* Add spacing inside the dropdown */
+    border: 1px solid #ccc; /* Optional: Add a clean border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    background-color: #fff; /* Background color */
+}
+
+/* Optional: On focus (when clicked) */
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}

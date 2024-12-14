@@ -18,7 +18,7 @@ class User(models.Model):
     email = models.EmailField(unique=True, blank=True, null=True)  # Ensures unique email
     password = models.CharField(max_length=255)  # Store password hash, not plaintext
     national_id = models.CharField(max_length=20, unique=True)  # Unique National ID
-    school = models.ForeignKey('School', on_delete=models.CASCADE, null=True, related_name="users")  
+    school = models.ForeignKey('School', on_delete=models.CASCADE,null=True, related_name="users")  
 
     # You can add additional fields as needed
     status = models.CharField(max_length=20, default='Pending')  # Default status

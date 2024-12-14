@@ -5,14 +5,14 @@
    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HeadTeacher Registration</title>
+    <title>Teacher Registration</title>
     <!-- Load CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/register_teacher.css' %}">
     <script src="{% static 'js/register.js' %}"></script>
 </head>
 <body>
     
-    <form id="registrationForm" method="POST" action="/register/headteacher/">
+    <form id="registrationForm" method="POST" action="/register/parent">
         {% csrf_token %}
         <div class="form-container">
             <!-- Left side: Personal Information -->
@@ -44,7 +44,7 @@
                     <div class="error" id="contactError"></div>
                 </div>
                 <div class="form-group">
-                    <label for="school">Select Your School</label>
+                    <label for="school">Select Your Child's School </label>
                     <select id="school" name="school" required>
                         <option value="">-- Select a School --</option>
                         {% for school in schools %}
@@ -54,7 +54,7 @@
                     <div class="error" id="schoolError"></div>
                 </div>
                 
-                <input type="hidden" id="role" name="role" value="Headteacher">
+                <input type="hidden" id="role" name="role" value="parent">
             </div>
             
             <div class="separator"></div> <!-- Line separator between sections -->
