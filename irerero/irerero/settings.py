@@ -87,6 +87,9 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
+# AUTH_USER_MODEL = 'irereroapp.User'
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -132,3 +135,7 @@ STATIC_ROOT = BASE_DIR / 'static'  # Collected static files will be stored here 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

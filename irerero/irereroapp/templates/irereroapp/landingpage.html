@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irerero Rwanda - Track your child's health, growth, and more.</title>
+    <link rel="icon" href="{% static 'media/icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- **** Header Section **** -->
+
+    <div class="header">
+        <!-- Video background -->
+        <video autoplay muted loop playsinline class="header-video">
+            <source src="{% static 'media/statistics_video.mp4' %}" type="video/mp4">
+        </video>
+
+        <nav>
+            <a href="{#}"><img src="{% static 'media/Irerero.png' %}" class="logo" alt=""></a>
+            <div>
+                <select class="language-btn">
+                    <option value="">English</option>
+                    <option value="">Kinyarwanda</option>
+                </select>
+                <a href="{% url 'login' %}"><button>Get Started</button></a>
+            </div>
+        </nav>
+
+        <div class="header-content">
+            <h1>Track your child's health, growth, and more.</h1>
+            <h3>Monitor progress at school. Stay informed anytime.</h3>
+            <p>Get started with health tracking</p>
+            <form action="{% url 'login' %}" class="email-signup">
+                <button type="submit">Get Started <i class="fas fa-chevron-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- **** Features Section **** -->
+
+    <section>
+
+        <div class="features">
+            <div class="row">
+                <div class="text-col">
+                    <h2>Track your child's health at school</h2>
+                    <p>View and track your child's health progress across devices seamlessly.</p>
+                </div>
+                <div class="img-col">
+                    <video autoplay muted loop playsinline>
+                        <source 
+                            src="{% static 'media/landingpagev1.mp4' %}"
+                            type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="row">
+                <div class="img-col">
+                    <img src="{% static 'media/image6.png' %}" alt="">
+                </div>
+                <div class="text-col">
+                    <h2>Access health updates anytime</h2>
+                    <p>Keep track of your child's health history </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- **** FAQ Section ****  -->
+
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <ul class="accordion">
+
+            <li>
+                <input type="radio" name="accordion" id="first">
+                <label for="first">What is Irerero?</label>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis iusto distinctio quas ipsa cum? Quo nam eaque quisquam rem eum iste magnam accusantium recusandae aspernatur ut perferendis, repellendus et repellat.
+                        <br><br>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro aut ratione harum quae reprehenderit impedit vero fugiat cum sint tempora, quod eveniet dolores qui aperiam facilis cupiditate corporis ut!
+                    </p>
+                </div>
+            </li>
+
+            <li>
+                <input type="radio" name="accordion" id="second">
+                <label for="second">How to use this platform?</label>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam voluptate, asperiores quod, consectetur officiis pariatur minus debitis amet dolorum nemo explicabo totam. Autem esse quod cumque pariatur delectus, nostrum sed.</p>
+                </div>
+            </li>
+
+            <li>
+                <input type="radio" name="accordion" id="third">
+                <label for="third">Where I can get help?</label>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, officiis perferendis aut nostrum alias nesciunt quae rerum, nisi voluptates aliquid, eum tempora consectetur dolorum? Iste consectetur laboriosam blanditiis illo illum.
+                        <br><br>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus commodi magnam fugiat sit eveniet pariatur, amet exercitationem enim minus hic debitis delectus rem at culpa dolorum, adipisci suscipit optio facere.
+                    </p>
+                </div>
+            </li>
+
+            <li>
+                <input type="radio" name="accordion" id="fourth">
+                <label for="fourth">Schools supported by this platform?</label>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium reiciendis molestiae doloremque consequuntur incidunt totam. Aspernatur, exercitationem necessitatibus distinctio labore, ipsum blanditiis deleniti tempore voluptates hic animi, laboriosam quasi nisi?</p>
+                </div>
+            </li>
+        </ul>
+        <small>Ready to track? Let’s start today!</small>
+        <form action="#" class="email-signup">
+            <button type="submit">Get Started <i class="fas fa-chevron-right"></i></button>
+        </form>
+    </div>
+
+    <!-- **** Footer Section ****  -->
+
+    <div class="footer">
+        <h2>Questions? call +250787564871</h2>
+
+        <div class="row">
+            <div class="col">
+                <a href="#">FAQ</a>
+                <a href="#">Privacy</a>
+                <a href="#">Speed Test</a>
+            </div>
+
+            <div class="col">
+                <a href="#">Help Center</a>
+                <a href="#">Cookies Preferences</a>
+                <a href="#">Legal Notices</a>
+            </div>
+
+            <div class="col">
+                <a href="#">Media Centre</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+
+        <select class="language-btn">
+            <option value="">English</option>
+            <option value="">Kinyarwanda</option>
+            <img src="{% static 'images/down-icon.png' %}" alt="">
+        </select>
+
+        <p class="copyright-text">Country of Thousand hills</p>
+
+        <div class="developer">
+            <!-- <p>Developed by Moise and Lucide</p> -->
+            <small>&copy; Copyright 2024 | Designed & Developed by Moise and Lucide | All Rights Reserved.</small>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

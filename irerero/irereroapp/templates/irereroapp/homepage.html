@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRERERO - Health Tracking for Schools</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script defer src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1><a href="{% url 'homepage' %}"><img src="{% static 'media/irerero.png' %}" alt="logo image"></a></h1>
+        <nav>
+            <a href="{% url 'homepage' %}" class="nav_header">Home</a>
+            <a href="{#}" class="nav_header">Class</a>
+            <a href="{#}" class="nav_header">Dashboard</a>
+           
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Default Image" class="default-image">
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+<section class="hero" id="home">
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="{% static 'media/children_video.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+        <h1>A Health Monitoring Solution for Early Learners</h1>
+        <p>Gain valuable insights into children's growth and well-being with ease</p>
+        <div class="cta-buttons">
+            <a href="{#}" class="btn-primary">Explore More</a>
+            <a href="{#}" class="btn-secondary">Summary Statistics</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Schools Section -->
+<section class="featured-schools">
+    <a href="{#}" class="cta-button">Start Attendance</a>
+    <a href="{#}" class="cta-button">Measure Health</a>
+<!-- 
+    <div class="school-gallery">
+        {% for school in schools %}
+        <div class="school-item">
+            <a href="{% url 'class_statistics' school.id %}">
+                <img src="{% static 'images/'|add:school.image %}" alt="{{ school.name }}" class="school-image">
+                <p class="school-description">{{ school.school_name }}</p>
+                <button class="school-button">View Statistics</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div> -->
+</section>
+
+<!-- Student Search Section -->
+<!-- <section class="student-search-section">
+    <h2>Browse The Children</h2>
+    <div class="student-results" id="student-results">
+        <ul id="student-list"></ul>
+    </div>
+</section> -->
+
+<div class="about_this_program" id="about_the_program">
+    <h2 class="about_this">About this Platform</h2>
+    <p>Our platform is designed to empower teachers with the tools to easily monitor and track the health of children under the age of five. By measuring essential health metrics such as height, weight, body temperature, and heart rate every time a child attends class, the platform enables teachers to gain valuable insights into each child's growth and overall well-being. In addition to individual data, the platform offers comprehensive statistical visualizations for entire classrooms, allowing for easy comparison and trend analysis. This innovative solution also supports tracking key health indicators like body mass index (BMI) and respiratory rate, ensuring that potential concerns are identified early, fostering healthier learning environments for all children.</p>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="contact_details_in_footer">
+        <p>Contact information</p>
+        <p>IRERERO</p>
+        <p>1234 Kigali City Rwanda</p>
+        <p>Email: info@irerero.com</p>
+        <p>Phone: +250789012212</p>
+    </div>
+    <div class="social_media">
+        <p>Connect with us</p>
+        <a href="https://x.com/i/flow/login?lang=en"><img src="{% static 'media/twitter_logo.png' %}" alt="twitter_logo"></a>
+        <a href="https://www.instagram.com/"><img src="{% static 'media/instagram.png' %}" alt=""></a>
+        <a href="https://web.facebook.com/?_rdc=1&_rdr"><img src="{% static 'media/facebook.png' %}" alt=""></a>
+    </div>
+    <div class="useful_links">
+        <h5>Useful Links</h5>
+        <p><a href="{#}">Privacy Policy</a></p>
+        <p><a href="{#}">Terms of Services</a></p>
+        <p><a href="{#}">FAQs</a></p>
+        <p><a href="{#}">Contact Us</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

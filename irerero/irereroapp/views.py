@@ -3,6 +3,49 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.db import models
 from .models import School, User
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
+
+def login_view(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+
+            # Check if the user exists
+            try:
+                user = User.objects.get(email=email)
+                if user.check_password(password):
+                    # Save user ID in session for login
+                    request.session['user_id'] = user.userID
+                    messages.success(request, f"Welcome back, {user.firstname}!")
+                    return redirect('register_schoolinfo')  # Replace with your dashboard or homepage URL
+                else:
+                    messages.error(request, "Invalid password.")
+            except User.DoesNotExist:
+                messages.error(request, "User with this email does not exist.")
+    else:
+        form = LoginForm()
+
+    return render(request, 'irereroapp/login.html', {'form': form})
+
+def logout_view(request):
+    request.session.flush()  # Clear all session data
+    messages.success(request, "You have been logged out.")
+    return redirect('login')
+
+
+def login_required(function):
+    def wrapper(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            messages.error(request, "You must be logged in to access this page.")
+            return redirect('login')
+        return function(request, *args, **kwargs)
+    return wrapper
+
+
+
 
 # Create your views here.
 def register(request):
@@ -158,6 +201,8 @@ def register_parent(request):
      schools = School.objects.all()
      return render(request, 'irereroapp/register_parent.html',{'schools': schools})
 
-def login(request):
-    
-    return render(request, 'irereroapp/login.html')
+def landing(request):
+    return render(request, 'irereroapp/landingpage.html')
+
+def homepage(request):
+    return render(request, 'irereroapp/homepage.html')

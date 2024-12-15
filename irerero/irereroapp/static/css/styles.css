@@ -1,0 +1,455 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            
+        }
+
+        /* Header */
+        header {
+            background-color:  rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box; /* use it when the something is hidden by scroll bar*/
+
+            
+        }
+        header:hover{
+            background-color: rgba(0, 0, 0, 0.918);
+        }
+        .nav_header:hover{
+            color: #e55b00;
+        }
+        
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color:white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional overlay */
+            height: 500px;
+        }
+        
+        .hero-video {
+            position:absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            margin-top: 100px;
+        }
+        
+        .hero-content {
+            
+           
+            
+            color: white;
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+            max-width: 800px; /* Limit width for better readability */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: to make the text more readable */
+            border-radius: 10px; /* Optional */
+        }
+        
+        .hero-content h1 {
+            margin: 0;
+            font-size: 3rem; /* Adjust as needed */
+        }
+        
+        .hero-content p {
+            margin: 15px 0;
+            font-size: 1.5rem; /* Adjust as needed */
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 10px 20px;
+            font-size: 1rem;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: #e91e63; /* Change color as needed */
+        }
+        .btn-primary:hover,.btn-secondary:hover{
+            transform: translateY(-5px) ;
+        }
+        
+        .btn-secondary {
+            background-color: #6E00B3; /* Change color as needed */
+        }
+        
+
+        .hero h2 {
+            font-size: 2.5em;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+        }
+
+        .cta-button {
+            background-color:#6E00B3;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 80px;
+            border-radius: 5px;
+        }
+        .cta-button:hover{
+            background-color: #e55b00;
+        } 
+
+        /* Search Section */
+        
+
+        
+
+        /* Featured Schools Section */
+        .featured-schools {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .featured-schools h2 {
+            font-size: 2.2em;
+            color: #333;
+        }
+
+        /* School Gallery Section */
+/* School Gallery Section */
+
+.school-gallery {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth; 
+    -webkit-overflow-scrolling: touch; 
+
+ 
+        overflow: hidden; 
+        white-space: nowrap; 
+        width: 100%; 
+        display: flex;
+        justify-content: center;
+      
+      
+}
+.school-item {
+    display: flex; 
+    animation: scroll 20s linear infinite; /* Infinite scrolling animation */
+  }
+      
+      
+      
+      /* Animation keyframes */
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%); /* Moves the entire container left */
+        }
+      
+
+}
+
+/* Individual School Item */
+.school-item {
+    text-align: center;
+    min-width: 220px; /* Set a minimum width for each item */
+    flex-shrink: 0; /* Prevent items from shrinking */
+    margin-right: 20px; /* Space between items */
+} 
+
+/* School Image */
+.school-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* School Description */
+.school-description {
+    font-size: 1em;
+    color: #333;
+    margin-top: 10px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+/* School Button */
+.school-button {
+    background-color: #6E00B3;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.school-button:hover {
+    background-color: #e55b00; /* Darker shade on hover */
+}
+
+
+
+        .school-gallery img {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* Student Search Section */
+        .student-search-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .student-search-section input {
+            width: 80%;
+            padding: 10px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+
+
+.student-results {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; 
+    max-width: 100%; 
+}
+.animated_student_list{
+    overflow: hidden; 
+        white-space: nowrap; 
+        width: 100%; 
+        display: flex;
+        justify-content: center;
+}
+
+
+
+        .student-results {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    gap: 20px;
+    overflow-x: auto; 
+    max-width: 100%;
+    padding-bottom: 20px;
+    position: relative;
+    
+       
+      
+}
+
+
+        .student-results ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .student-results li {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: 250px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+.student-results img {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 8px; 
+    object-fit: cover; 
+}
+
+
+        .student-results .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.2em;
+            padding: 10px;
+            border-radius: 8px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .student-results li:hover .overlay {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .student-results h3 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .student-results p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        .student-results .status {
+            margin-top: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .status {
+            font-size: 1.2em;
+        }
+
+        .student-results .status .active-status {
+            color: blue;
+        }
+
+        .student-results button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+
+
+
+
+ 
+
+        header:hover{
+            color: #ff5100;
+        }
+
+        nav img.default-image {
+        width: 50px; 
+        height: auto;
+        margin-left: 10px; 
+        vertical-align: middle; 
+        border-radius: 50px;
+}
+.about_this{
+    text-align: center;
+}
+.contact_details_in_footer{
+    text-align: left;
+}
+
+.school-gallery:hover .school-item, 
+.student-results:hover .student-lists {
+    animation-play-state: paused;
+    cursor: pointer; 
+}
+
+
+/* Footer */
+footer {
+    background-color:#6E00B3;
+    color: white;
+    padding: 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+
+footer div {
+    flex: 1; 
+    max-width: 300px; 
+}
+
+footer a {
+    color: #ff6600;
+    text-decoration: none;
+}
+
+.social_media img {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.useful_links h5 {
+    margin-bottom: 10px;
+}
+
+
+

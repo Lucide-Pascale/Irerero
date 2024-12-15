@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
+from django.contrib.auth.hashers import make_password, check_password
+from datetime import date
 
 
 class User(models.Model):
@@ -16,7 +18,7 @@ class User(models.Model):
     role = models.CharField(max_length=50, choices=ROLE_CHOICES)
     phonenumber = models.CharField(max_length=15, blank=True, null=True)  # Optional field
     email = models.EmailField(unique=True, blank=True, null=True)  # Ensures unique email
-    password = models.CharField(max_length=255)  # Store password hash, not plaintext
+    password = models.CharField(max_length=255, null=False, blank=False)  # Store password hash, not plaintext
     national_id = models.CharField(max_length=20, unique=True)  # Unique National ID
     school = models.ForeignKey('School', on_delete=models.CASCADE,null=True, related_name="users")  
 
@@ -24,6 +26,14 @@ class User(models.Model):
     status = models.CharField(max_length=20, default='Pending')  # Default status
     created_at = models.DateTimeField(auto_now_add=True)  # Automatically set on creation
     updated_at = models.DateTimeField(auto_now=True)  # Automatically set on update
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+        self.save()
+
+# Add a method to verify passwords
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname} ({self.role})"
@@ -61,7 +71,7 @@ class ParentsDetails(models.Model):
     def __str__(self):
         return f"Parent details for {self.user.firstname} {self.user.lastname} with child {self.child_name}"
 
-from django.db import models
+
 
 class School(models.Model):
     school_name = models.CharField(max_length=255)  # The name of the school
@@ -77,54 +87,36 @@ class School(models.Model):
         return self.school_name
 
 
-# 1. Teacher Model
-class Teacher(models.Model):
-    id = models.AutoField(primary_key=True)  # Explicit primary key
-    Firstname = models.CharField(max_length=255)
-    Lastname = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
 
-    def __str__(self):
-        return self.Firstname
-
-
-# 2. Class Model
 class Class(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='classes')
-    profile_picture = models.ImageField(upload_to='profile_pics/',default='SEEL.jepg')
+    teacher = models.ManyToManyField(User, limit_choices_to={'role': 'Teacher'}, related_name='classes')
+    profile_picture = models.ImageField(upload_to='media/', default='SEEL.jpg')
+    
     def __str__(self):
-        return self.name
+        teacher = ", ".join([User.firstname for User in self.teacher.all()])
+        return f"{self.name} - Teachers: {teacher}"
 
 
-# 3. Guardian Model
-class Guardian(models.Model):
-    id = models.AutoField(primary_key=True)
-    Firstname = models.CharField(max_length=255)
-    Lastname = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/',default='default.jepg')
-    def __str__(self):
-        return self.Firstname
 
-
-# 4. child Model
 class child(models.Model):
     GENDER_CHOICES = [
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,default='M')
-    age = models.PositiveIntegerField()
-    profile_picture = models.ImageField(upload_to='profile_pics/',default='default.jepg')
-    guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE, related_name='students')
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
+    Dob = models.DateField()  # Store the child's date of birth
+    profile_picture = models.ImageField(upload_to='media/', default='default.jpg')
+    guardian = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'Parent'}, related_name='children')
     student_class = models.ForeignKey(Class, on_delete=models.CASCADE, related_name='students')
+    age = models.PositiveIntegerField()
+
+    def age(self):
+        today = date.today()
+        return today.year - self.Dob.year - ((today.month, today.day) < (self.Dob.month, self.Dob.day))
 
     def __str__(self):
         return self.name
@@ -151,8 +143,6 @@ class HealthMetricRecord(models.Model):
     def __str__(self):
         return f"{self.metric_type.name}: {self.value} ({self.child.name})"
     
-from django.db import models
-from django.utils.timezone import now
 
 class Attendance(models.Model):
     child = models.ForeignKey(child, on_delete=models.CASCADE, related_name='attendance_records')
