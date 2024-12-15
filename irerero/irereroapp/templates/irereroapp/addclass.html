@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headteacher Dashboard</title>
+    <!-- Static file loading -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/headteacher.css' %}">
+    <script src="{% static 'js/headteacher.js' %}" defer></script>
+</head>
+
+<body>
+    <!-- Top Row -->
+    <div class="top_row">
+        <div>
+            <img src="{% static 'media/Irerero.png' %}" alt="Irerero Logo">
+        </div>
+        <!-- <h1 class="head_teacher">Head Teacher</h1> -->
+    </div>
+
+    <div class="universal_div">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="#" class="hover-nav">Classes</a>
+                    <div class="sub-menu">
+                        <a href="#" id="view-classes">View Classes</a>
+                        <a href="#" id="add-class">Add Class</a>
+                        <a href="#" id="edit-delete-class">Delete/Edit Class</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="hover-nav">Student</a>
+                    <div class="sub-menu">
+                        <a href="#" id="student-list">Student List</a>
+                        <a href="#" id="add-student">Add Student</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="hover-nav">Attendance Records</a>
+                    <div class="sub-menu">
+                        <a href="#" id="see-records">See Records</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="hover-nav">Teachers</a>
+                    <div class="sub-menu">
+                        <a href="#" id="approved-teachers">Approved Teachers</a>
+                        <a href="#" id="waiting-for-approval">Waiting for Approval</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="hover-nav">Parents</a>
+                    <div class="sub-menu">
+                        <a href="#" id="approved-parents">Approved Parents</a>
+                        <a href="#" id="waiting-for-approval-parents">Waiting for Approval</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <!-- Classes Content -->
+            <div id="view-classes-content">
+                <h3>Classes</h3>
+                
+                <div class="class-box">
+                    <img src="{% static 'media/child10.jpg' %}" alt="Class 1">
+                    <h3>Class A</h3>
+                    <p>Teacher: John Doe</p>
+                    <button>View Details</button>
+                </div>
+                <div class="class-box">
+                    <img src="{% static 'media/child10.jpg' %}" alt="Class 2">
+                    <h3>Class B</h3>
+                    <p>Teacher: Jane Smith</p>
+                    <button>View Details</button>
+                </div>
+                <div class="class-box">
+                    <img src="{% static 'media/child2.jpg' %}" alt="Class 3">
+                    <h3>Class C</h3>
+                    <p>Teacher: Mary Johnson</p>
+                    <button>View Details</button>
+                </div>
+            </div>
+
+            <!-- Add Class Form -->
+            <div id="add-class-content">
+                <h3>Add Class</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+             {{ form.as_p }}
+                    <label>Class Image</label>
+                    <input type="file" name="class-image">
+                    <label>Class Name</label>
+                    <input type="text" name="class-name">
+                    <label>Class Teacher</label>
+                    <input type="text" name="class-teacher">
+                    <button type="submit">Add Class</button>
+                </form>
+            </div>
+
+            <!-- Edit/Delete Class Form -->
+            <div id="edit-delete-class-content">
+                <h3>Edit/Delete Class</h3>
+                <form>
+                    <label>Class Image</label>
+                    <input type="file" name="edit-class-image">
+                    <label>Class Name</label>
+                    <input type="text" name="edit-class-name">
+                    <label>Class Teacher</label>
+                    <input type="text" name="edit-class-teacher">
+                    <button type="submit" class="submit_button">Submit Edits</button>
+                    <button type="button" class="delete_button">Delete Class</button>
+                </form>
+            </div>
+
+            <!-- Other content sections -->
+            <div id="student-list-content">
+                <h3>Student List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Parent</th>
+                            <th>Health Status</th>
+                            <th>Age</th>
+                            <th>Class</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>John Doe</td>
+                            <td>Healthy</td>
+                            <td>7</td>
+                            <td>Class A</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Add Student</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

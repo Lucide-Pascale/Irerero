@@ -2,9 +2,24 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.db import models
-from .models import School, User
+from .models import School, User, Class
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
+from .forms import ClassForm
+
+def attendance(request):
+    return render(request, 'irereroapp/attendance.html')
+
+def add_class(request):
+    if request.method == 'POST':
+        form = ClassForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('class-list')  # Replace with your desired redirect view
+    else:
+        form = ClassForm()
+    
+    return render(request, 'irereroapp/addclass.html', {'form': form})
 
 def login_view(request):
     if request.method == "POST":
@@ -20,7 +35,7 @@ def login_view(request):
                     # Save user ID in session for login
                     request.session['user_id'] = user.userID
                     messages.success(request, f"Welcome back, {user.firstname}!")
-                    return redirect('register_schoolinfo')  # Replace with your dashboard or homepage URL
+                    return redirect('homepage')  # Replace with your dashboard or homepage URL
                 else:
                     messages.error(request, "Invalid password.")
             except User.DoesNotExist:
@@ -206,3 +221,4 @@ def landing(request):
 
 def homepage(request):
     return render(request, 'irereroapp/homepage.html')
+

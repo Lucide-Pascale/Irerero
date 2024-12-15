@@ -7,9 +7,17 @@
     <title>Choose Account Type</title>
     <!-- Using Django's static files -->
     <link rel="stylesheet" href="{% static 'css/register1.css' %}">
+    
     <script src="{% static 'js/register.js' %}"></script>
 </head>
+
 <body>
+    <div class="header">
+        <header>
+            <h1><a href="{% url 'homepage' %}"><img src="{% static 'media/irerero.png' %}" alt="logo image"></a></h1>
+            
+        </header>
+        </div>
     <h1>Choose Your Account Type</h1>
     <div class="card-container">
         <a href="{% url 'register_schoolinfo' %}" class="card">

@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Page</title>
+    <!-- Static files for CSS and JS -->
+    <link rel="stylesheet" href="{% static 'css/attendance.css' %}">
+    <script src="{% static 'js/attendance.js' %}" defer></script>
+</head>
+<body>
+
+    <!-- Top Navigation Row -->
+    <div class="top_row">
+        <a href="{% url 'homepage' %}">
+            <img src="{% static 'media/Irerero.png' %}" alt="Logo" class="logo">
+        </a>
+        <h1>Attendance</h1>
+        <nav class="navigation_bar">
+            <a href="{% url 'homepage' %}" class="nav_header">Home</a>
+            <a href="{#}" class="nav_header">Class</a>
+            <a href="{% url 'add_class' %}" class="nav_header">Dashboard</a>
+        </nav>
+    </div>
+
+    <!-- Universal Div for Content -->
+    <div class="universal_div">
+        <!-- Attendance Table -->
+        <div class="container">
+            <h2>Attendance</h2>
+            <h3>Today's Attendance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Child Name</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                        <th>Attendance Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for child in attendance_list %}
+                    <tr>
+                        <td>{{ child.name }}</td>
+                        <td>{{ child.status }}</td>
+                        <td>{{ child.remarks }}</td>
+                        <td>{{ child.date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No attendance records available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Attendance Form -->
+        <div class="form-container">
+            <h2>Tracking Attendance</h2>
+            <form method="POST" action="{% url 'attendance' %}">
+                {% csrf_token %}
+                <label for="childName">Child Name:</label>
+                <select id="childName" name="childName">
+                    {% for child in children %}
+                    <option value="{{ child.id }}">{{ child.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="status" id="present" value="Present"> Present
+                    </label>
+                    <label>
+                        <input type="radio" name="status" id="absent" value="Absent"> Absent
+                    </label>
+                </div>
+
+                <label for="remarks">Remarks:</label>
+                <textarea id="remarks" name="remarks" placeholder="Type something about the child"></textarea>
+
+                <label for="attendanceDate">Attendance Date:</label>
+                <input type="date" id="attendanceDate" name="attendanceDate">
+
+                <button type="submit">Submit Attendance</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
