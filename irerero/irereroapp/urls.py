@@ -20,4 +20,8 @@ urlpatterns = [
     # path('register/teacher/', views.register_teacher, name='register_teacher'),
     # path('register/parent/', views.register_parent, name='register_parent'),
     # path('login/', views.login_view, name='login'),
+    
+    
+    
+    path('dashboard/', views.AdminDashboard, name='dashboard'),
 ]

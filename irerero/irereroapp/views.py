@@ -301,4 +301,7 @@ def homepage(request):
     return render(request, 'irereroapp/homepage.html')
 
 
+def AdminDashboard(request):
+    return render(request, 'irereroapp/adminDashboard.html')
+
 
