@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics Management</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Static CSS and JS -->
+    <link rel="stylesheet" href="{% static 'css/health.css' %}">
+    <script src="{% static 'js/health.js' %}" defer></script>
+</head>
+<body>
+
+    <!-- Top Row -->
+    <div class="top_row">
+        <a href="{% url 'homepage' %}">
+            <img src="{% static 'media/Irerero.png' %}" alt="Logo" class="logo">
+        </a>
+        <h1>HEALTH METRICS MEASUREMENT</h1>
+        <nav class="navigation_bar">
+            <a href="{% url 'homepage' %}" class="nav_header">Home</a>
+            <a href="#" class="nav_header">Class</a>
+            <a href="{% url 'add_class' %}" class="nav_header">Dashboard</a>
+        </nav>
+    </div>
+
+    <div class="universal_container">
+        <!-- Health Metric Recording -->
+        <div class="container">
+            <h1>Health Metric Recording</h1>
+
+            <div class="metrics-recording-section">
+                <h3>Add New Health Metrics</h3>
+
+                <form method="POST" action="{% url 'health' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Student Name Dropdown -->
+                    <label for="student-name">Student Name:</label>
+                    <select id="student-name" name="student_name" required>
+                        {% for child in children %}
+                            <option value="{{ child.id }}">{{ child.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Metric Type Dropdown -->
+                    <label for="metric-type">Metric Type:</label>
+                    <select id="metric-type" name="metric_type" required>
+                        {% for metric_type in metric_types %}
+                            <option value="{{ metric_type.id }}">{{ metric_type.name }} ({{ metric_type.unit }})</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Metric Value Input -->
+                    <label for="metric-value">Metric Value:</label>
+                    <input type="number" id="metric-value" name="metric_value" placeholder="Enter metric value" required>
+
+                    <button type="submit">Record Metric</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Health Trends -->
+        <div class="container">
+            <h1>Health Trends</h1>
+
+            <div class="health-metrics-section">
+                <h3>Health Trends Visualization</h3>
+                <p>Below you can see the health trends of a child's metrics (e.g., height, weight) over time.</p>
+
+                <div class="chart-container">
+                    <canvas id="healthTrendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Include JS for Chart.js functionality -->
+    <script>
+        // Example Chart.js logic - Replace with dynamic data passed from the view
+    </script>
+
+</body>
+</html>

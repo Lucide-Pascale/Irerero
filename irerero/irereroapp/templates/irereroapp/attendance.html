@@ -40,52 +40,70 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for child in attendance_list %}
-                    <tr>
-                        <td>{{ child.name }}</td>
-                        <td>{{ child.status }}</td>
-                        <td>{{ child.remarks }}</td>
-                        <td>{{ child.date }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4">No attendance records available.</td>
-                    </tr>
-                    {% endfor %}
+                    {% for record in attendance %}
+        <tr>
+            <td>{{ record.child.name }}</td>
+            <td>
+                {% if record.is_present %}
+                    Present
+                {% else %}
+                    Absent
+                {% endif %}
+            </td>
+            <td>{{ record.remarks|default:"N/A" }}</td>
+            <td>{{ record.date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No attendance records available.</td>
+        </tr>
+        {% endfor %}
                 </tbody>
             </table>
         </div>
 
-        <!-- Attendance Form -->
-        <div class="form-container">
-            <h2>Tracking Attendance</h2>
-            <form method="POST" action="{% url 'attendance' %}">
-                {% csrf_token %}
-                <label for="childName">Child Name:</label>
-                <select id="childName" name="childName">
-                    {% for child in children %}
-                    <option value="{{ child.id }}">{{ child.name }}</option>
-                    {% endfor %}
-                </select>
+        <!-- Display Django Messages -->
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="status" id="present" value="Present"> Present
-                    </label>
-                    <label>
-                        <input type="radio" name="status" id="absent" value="Absent"> Absent
-                    </label>
-                </div>
+    <!-- Attendance Form -->
+    <div class="form-container">
+        <h2>Record Attendance</h2>
+        <form method="POST" action="{% url 'attendance' %}">
+            {% csrf_token %}
+            <label for="childName">Child Name:</label>
+            <select id="childName" name="childName" required>
+                <option value="" disabled selected>Select a child</option>
+                {% for child in children %}
+                <option value="{{ child.id }}">{{ child.name }}</option>
+                {% endfor %}
+            </select>
 
-                <label for="remarks">Remarks:</label>
-                <textarea id="remarks" name="remarks" placeholder="Type something about the child"></textarea>
+            <div>
+                <label>
+                    <input type="radio" name="status" value="Present" required> Present
+                </label>
+                <label>
+                    <input type="radio" name="status" value="Absent" required> Absent
+                </label>
+            </div>
 
-                <label for="attendanceDate">Attendance Date:</label>
-                <input type="date" id="attendanceDate" name="attendanceDate">
+            <label for="remarks">Remarks:</label>
+            <textarea id="remarks" name="remarks" placeholder="Type something about the child"></textarea>
 
-                <button type="submit">Submit Attendance</button>
-            </form>
-        </div>
+            <label for="attendanceDate">Attendance Date:</label>
+            <input type="date" id="attendanceDate" name="attendanceDate" required>
+
+            <button type="submit">Submit Attendance</button>
+        </form>
+    </div>
     </div>
 
 </body>

@@ -2,14 +2,60 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.db import models
-from .models import School, User, Class
+from .models import School, User, Class, Attendance, child, HealthMetricRecord, HealthMetricType
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 from .forms import ClassForm
+from django.utils import timezone
+def login_required(function):
+    def wrapper(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            messages.error(request, "You must be logged in to access this page.")
+            return redirect('login')
+        return function(request, *args, **kwargs)
+    return wrapper
 
+@login_required
 def attendance(request):
-    return render(request, 'irereroapp/attendance.html')
+    if request.method == "POST":
+        # Handle form submission
+        child_id = request.POST.get('childName')
+        status = request.POST.get('status')
+        remarks = request.POST.get('remarks')
+        attendance_date = request.POST.get('attendanceDate')
 
+        # Ensure the required fields are provided
+        if not child_id or not status:
+            messages.error(request, "Please fill out all required fields.")
+            return redirect('attendance')
+
+        # Convert status to Boolean
+        is_present = True if status == 'Present' else False
+
+        try:
+            # Fetch the child record
+            child1 = child.objects.get(id=child_id)
+
+            # Save attendance to the database
+            Attendance.objects.create(
+                child=child1,
+                date=attendance_date or timezone.now().date(),
+                is_present=is_present,
+                remarks=remarks
+            )
+
+            # Success message
+            messages.success(request, "Attendance successfully recorded!")
+            return redirect('attendance')  # Reload the page to clear the form
+        except child.DoesNotExist:
+            messages.error(request, "Invalid child selected.")
+            return redirect('attendance')
+
+    attendance_records = Attendance.objects.select_related('child').all()
+    children = child.objects.all()
+    return render(request, 'irereroapp/attendance.html',{'attendance': attendance_records,'children': children})
+
+@login_required
 def add_class(request):
     if request.method == 'POST':
         form = ClassForm(request.POST, request.FILES)
@@ -48,17 +94,49 @@ def login_view(request):
 def logout_view(request):
     request.session.flush()  # Clear all session data
     messages.success(request, "You have been logged out.")
-    return redirect('login')
+    return redirect('landing')
 
+def health(request):
+    
+    if request.method == 'POST':
+            # Get form data from the POST request
+            child_id = request.POST.get('student_name')
+            metric_type_id = request.POST.get('metric_type')
+            metric_value = request.POST.get('metric_value')
 
-def login_required(function):
-    def wrapper(request, *args, **kwargs):
-        if 'user_id' not in request.session:
-            messages.error(request, "You must be logged in to access this page.")
-            return redirect('login')
-        return function(request, *args, **kwargs)
-    return wrapper
+            # Ensure required fields are provided
+            if not child_id or not metric_value or not metric_type_id:
+                messages.error(request, "Please fill out all required fields.")
+                return redirect('health')
 
+            try:
+                # Fetch the child and metric type records
+                selected_child = child.objects.get(id=child_id)
+                metric_type = HealthMetricType.objects.get(id=metric_type_id)
+
+                # Create and save the health metric record
+                HealthMetricRecord.objects.create(
+                    child=selected_child,
+                    metric_type=metric_type,
+                    value=metric_value
+                )
+
+                # Success message
+                messages.success(request, "Health metric successfully recorded!")
+                return redirect('health')  # Redirect to clear the form
+            except child.DoesNotExist:
+                messages.error(request, "Invalid child selected.")
+                return redirect('health')
+            except HealthMetricType.DoesNotExist:
+                messages.error(request, "Invalid metric type selected.")
+                return redirect('health')
+
+        # Fetch all children and health metric types to populate the dropdowns
+    children = child.objects.all()
+    metric_types = HealthMetricType.objects.all()
+
+        # Render the template with the children and metric types
+    return render(request, 'irereroapp/health.html', {'children': children, 'metric_types': metric_types})
 
 
 
@@ -218,7 +296,9 @@ def register_parent(request):
 
 def landing(request):
     return render(request, 'irereroapp/landingpage.html')
-
+@login_required
 def homepage(request):
     return render(request, 'irereroapp/homepage.html')
+
+
 

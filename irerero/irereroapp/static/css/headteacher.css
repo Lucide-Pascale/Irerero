@@ -1,165 +1,194 @@
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .universal_div {
-      display: flex;
-      font-family: Arial, sans-serif;
-    }
-    .top_row{
-        display: flex;
-        background-color:rgba(0, 0, 0, 1);
-        height: 60px;
-        justify-content: space-between;
-        position: fixed;
-        z-index: 1000;
-        width: 100vw;
-        box-sizing: border-box;
-        
-       
-    }
-    .head_teacher{
-        color: white;
-    }
-    
+.universal_div {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
 
-    .sidebar {
-      width: 250px;
-      background-color: rgba(0, 0, 0, 1);
-      color: white;
-      padding: 20px;
-      position: fixed;
-      height: 100vh;
-      margin-top: 50px;
-    }
 
-    .sidebar ul {
-      list-style-type: none;
-    }
+.top_row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background-color: rgba(0, 0, 0, 1); /* Black background */
+padding: 10px 20px;
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+box-sizing: border-box;
+margin-bottom: 200px;
+}
 
-    .sidebar li {
-      margin: 15px 0;
-      position: relative;
-    }
+.top_row img {
+height: 50px;
+}
 
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-      border-radius: 5px;
-    }
+.navigation_bar {
+display: flex;
+gap: 15px;
+}
 
-    .sidebar a:hover {
-      background-color: #575757;
-    }
+.nav_header {
+color: white;
+text-decoration: none;
+font-weight: bold;
+padding: 5px 10px;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
 
-    .hover-nav {
-      position: relative;
-    }
+.nav_header:hover {
+background-color: rgba(255, 255, 255, 0.2);
+}
 
-    .hover-nav:hover + .sub-menu,
-    .sub-menu:hover {
-      display: block;
-    }
+.sidebar {
+  width: 250px;
+  background-color:  rgba(0, 0, 0, 1);
+  color: white;
+  padding: 20px;
+  position: fixed;
+  height: 100vh;
+  margin-top: 40px;
+}
 
-    .sub-menu {
-      display: none;
-      position: absolute;
-      left: 100%;
-      top: 0;
-      background-color: #444;
-      padding: 10px;
-      border-radius: 5px;
-      width: 200px;
-    }
+.sidebar ul {
+  list-style-type: none;
+}
 
-    .sub-menu a {
-      padding: 8px;
-      border-radius: 5px;
-      color: white;
-    }
+.sidebar li {
+  margin: 15px 0;
+  position: relative;
+}
 
-    .sub-menu a:hover {
-      background-color: #666;
-    }
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
 
-    .content {
-      margin-left: 270px;
-      padding: 20px;
-      width: calc(100% - 270px);
-    }
+.sidebar a:hover {
+  background-color: #575757;
+}
 
-    .class-box {
-      display: inline-block;
-      width: 200px;
-      margin: 10px;
-      padding: 10px;
-      background-color: #f4f4f4;
-      border-radius: 5px;
-      text-align: center;
-    }
+.hover-nav {
+  position: relative;
+}
 
-    .class-box img {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
+.hover-nav:hover + .sub-menu,
+.sub-menu:hover {
+  display: block;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+.sub-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #444;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+}
 
-    table th, table td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
+.sub-menu a {
+  padding: 8px;
+  border-radius: 5px;
+  color: white;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-    }
+.sub-menu a:hover {
+  background-color: #666;
+}
 
-    form label {
-      margin-bottom: 5px;
-    }
+.content {
+    margin-top: 60px;
+  margin-left: 270px;
+  padding: 20px;
+  width: calc(100% - 270px);
+}
+.add-student-content{
+   margin: 40px;
+}
 
-    form input {
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
+.class-box {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  text-align: center;
+}
 
-    form button {
-      padding: 10px;
-      background-color: #6E00B3;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .submit_button{
-        margin-bottom: 10px;
-    }
-    .delete_button{
-        margin-bottom: 10px;
-    }
+.class-box img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 
-    form button:hover {
-      background-color:#6E00B3;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
 
-    #see-records-content, #approved-teachers-content, #waiting-for-approval-content, 
-    #approved-parents-content, #waiting-for-approval-parents-content {
-      display: none;
-    }
- 
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+form label {
+  margin-bottom: 5px;
+}
+
+form input {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.click{
+    background-color: #6E00B3;;
+}
+
+
+
+#see-records-content, #approved-teachers-content, #waiting-for-approval-content, 
+#approved-parents-content, #waiting-for-approval-parents-content {
+  display: none;
+}
+.submit_button{
+   margin: 30px;
+   background-color: #6E00B3;;
+}
+button{
+    width: 100px;
+    background-color: #6E00B3;;
+
+}

@@ -18,9 +18,9 @@
         <nav>
             <a href="{% url 'homepage' %}" class="nav_header">Home</a>
             <a href="{#}" class="nav_header">Class</a>
-            <a href="{% url 'add_class'%}" class="nav_header">Dashboard</a>
-           
-            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Default Image" class="default-image">
+            <a href="{% url 'headteacherd'%}" class="nav_header">Dashboard</a>
+            <a href="{%url 'logout'%}" class="nav_header"><button>Logout</button></a>
+            <!-- <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Default Image" class="default-image"> -->
         </nav>
     </header>
 
@@ -43,7 +43,7 @@
 <!-- Featured Schools Section -->
 <section class="featured-schools">
     <a href="{%url 'attendance'%}" class="cta-button">Start Attendance</a>
-    <a href="{#}" class="cta-button">Measure Health</a>
+    <a href="{%url 'health'%}" class="cta-button">Measure Health</a>
 <!-- 
     <div class="school-gallery">
         {% for school in schools %}
