@@ -107,24 +107,59 @@
                         <span class="number">{{total_parents}}</span>
                     </div>
                 </div>
-                <div class="boxes" style="gap: 20px; margin-top: 20px">
-                    <div class="box box1">
-                        <i class="uil uil-users-alt"></i> <!-- New Icon -->
-                        <span class="text">Total Users</span>
-                        <span class="number">{{total_users}}</span>
+                <div class="activity">
+                    <div class="title">
+                        <i class="uil uil-clock-three"></i>
+                        <span class="text">Recent Children</span>
                     </div>
-                    <div class="box box2">
-                        <i class="uil uil-building"></i> <!-- Icon for Schools -->
-                        <span class="text">Total Schools</span>
-                        <span class="number">{{total_schools}}</span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-user-md"></i> <!-- New Icon for Headteachers -->
-                        <span class="text">Total Headteachers</span>
-                        <span class="number">{{total_headteachers}}</span>
+                
+                    <div class="activity-data">
+                        <div class="data names">
+                            <span class="data-title">Name</span>
+                            {% for child in recent_children %}
+                                <span class="data-list">{{ child.name }}</span>
+                            {% empty %}
+                                <span class="data-list">No children available</span>
+                            {% endfor %}
+                        </div>
+                
+                        <div class="data email">
+                            <span class="data-title">Guardian</span>
+                            {% for child in recent_children %}
+                                <span class="data-list">{{ child.guardian.email }}</span>
+                            {% empty %}
+                                <span class="data-list">No guardian available</span>
+                            {% endfor %}
+                        </div>
+                
+                        <div class="data joined">
+                            <span class="data-title">DOB</span>
+                            {% for child in recent_children %}
+                                <span class="data-list">{{ child.Dob }}</span>
+                            {% empty %}
+                                <span class="data-list">No DOB available</span>
+                            {% endfor %}
+                        </div>
+                
+                        <div class="data type">
+                            <span class="data-title">Age</span>
+                            {% for child in recent_children %}
+                                <span class="data-list">{{ child.age }}</span>
+                            {% empty %}
+                                <span class="data-list">No age available</span>
+                            {% endfor %}
+                        </div>
+                
+                        <div class="data status">
+                            <span class="data-title">Status</span>
+                            {% for child in recent_children %}
+                                <span class="data-list">Active</span>  <!-- You can add dynamic status here -->
+                            {% empty %}
+                                <span class="data-list">No status available</span>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-                
                 
             </div>
 
