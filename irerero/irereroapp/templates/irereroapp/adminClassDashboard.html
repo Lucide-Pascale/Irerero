@@ -1,0 +1,172 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <title>Admin Dashboard Panel</title>
+
+</head>
+<style>
+    /* Table Styling */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.styled-table th {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+
+.styled-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.styled-table td {
+    color: #333;
+}
+
+/* Action Buttons Styling */
+.action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.action-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #333;
+}
+
+.action-btn:hover {
+    background-color: #f4f4f4;
+    transform: scale(1.1);
+}
+
+.action-btn.view {
+    color: #2196F3;
+}
+
+.action-btn.edit {
+    color: #FF9800;
+}
+
+.action-btn.delete {
+    color: #F44336;
+}
+
+.action-btn:focus {
+    outline: none;
+}
+
+/* Optional: Add borders or shadows to make icons stand out */
+.action-btn {
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.action-btn.view:hover {
+    background-color: #e3f2fd;
+}
+
+.action-btn.edit:hover {
+    background-color: #fff3e0;
+}
+
+.action-btn.delete:hover {
+    background-color: #ffebee;
+}
+
+</style>
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="{% static 'media/Irerero.png' %}" alt="">
+            </div>
+            <span class="logo_name">Irerero</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#"><i class="uil uil-estate"></i><span class="link-name">Dashboard</span></a></li>
+                <li><a href="#"><i class="uil uil-book-reader"></i><span class="link-name">Classes</span></a></li>
+                <li><a href="#"><i class="uil uil-users-alt"></i><span class="link-name">Children</span></a></li>
+                <li><a href="#"><i class="uil uil-user-nurse"></i><span class="link-name">Teachers</span></a></li>
+                <li><a href="#"><i class="uil uil-user-plus"></i><span class="link-name">Parents</span></a></li>
+                <li><a href="#"><i class="uil uil-calendar-alt"></i><span class="link-name">Attendance Records</span></a></li>
+                <li><a href="#"><i class="uil uil-heart-medical"></i><span class="link-name">Health Metrics</span></a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#"><i class="uil uil-signout"></i><span class="link-name">Logout</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+        </div>
+
+        <div class="dash-content">
+            <h1>Classes</h1>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Class ID</th>
+                        <th>Class Name</th>
+                        <th>Class Teacher</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for class in classes %}
+                    <tr>
+                        <td>{{ class.id }}</td>
+                        <td>{{ class.name }}</td>
+                        <td>
+                            {% for teacher in class.teacher.all %}
+                                {{ teacher.firstname }}{{ forloop.last|yesno:", " }}
+                            {% endfor %}
+                        </td>
+                        <td class="action-buttons">
+                            <button class="action-btn view"><i class="uil uil-eye"></i></button>
+                            <button class="action-btn edit"><i class="uil uil-edit"></i></button>
+                            <button class="action-btn delete"><i class="uil uil-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </section>
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
+
+</body>
+</html>

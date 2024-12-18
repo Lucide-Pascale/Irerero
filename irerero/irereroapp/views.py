@@ -352,3 +352,20 @@ def AdminDashboard(request):
     }
 
     return render(request, 'irereroapp/adminDashboard.html', context)
+
+def getAllClasses(request):
+    classes = Class.objects.all()
+    return render(request, 'irereroapp/adminClassDashboard.html', {'classes': classes})
+def getChildren(request):
+    children = child.objects.all()
+    return render(request, 'irereroapp/adminChildrenDashboard.html', {'children': children})
+def getParents(request):
+    parents = User.objects.filter(role='Parent')
+    return render(request, 'irereroapp/adminParentsDashboard.html', {'parents': parents})
+
+def getTeachers(request):
+    teachers = User.objects.filter(role='Teacher')
+    return render(request, 'irereroapp/adminTeachersDashboard.html', {'teachers': teachers})
+
+    
+    
