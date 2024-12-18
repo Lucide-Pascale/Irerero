@@ -302,6 +302,27 @@ def homepage(request):
 
 
 def AdminDashboard(request):
-    return render(request, 'irereroapp/adminDashboard.html')
+    total_parents = User.objects.filter(role='Parent').count()
+    total_teachers = User.objects.filter(role='teacher').count()
+    total_headteachers = User.objects.filter(role='headteacher').count()
+    total_users = User.objects.count()  # Total users regardless of role
+    total_children = child.objects.count()
+    total_schools = School.objects.count()
+    total_classes = Class.objects.count()
+    
+    
+    context = {
+        'total_users': total_users,
+        'total_children': total_children,
+        'total_schools': total_schools,
+        'total_teachers': total_teachers,
+        'total_classes': total_classes,
+        'total_parents': total_parents,
+        'total_headteachers': total_headteachers
+    }
+    
+    return render(request, 'irereroapp/adminDashboard.html',context)
+
+
 
 
