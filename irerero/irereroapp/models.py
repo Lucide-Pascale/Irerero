@@ -113,6 +113,8 @@ class child(models.Model):
     guardian = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'Parent'}, related_name='children')
     student_class = models.ForeignKey(Class, on_delete=models.CASCADE, related_name='students')
     age = models.PositiveIntegerField()
+    
+    
 
     def age(self):
         today = date.today()

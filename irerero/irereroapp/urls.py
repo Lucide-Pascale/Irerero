@@ -24,4 +24,9 @@ urlpatterns = [
     
     
     path('dashboard/', views.AdminDashboard, name='dashboard'),
+    path('dashboard/classes/', views.getAllClasses, name='classes_headteacher'),
+    path('dashboard/teachers/', views.getTeachers, name='teachers_headteacher'),
+    path('dashboard/children/', views.getChildren, name='children_headteacher'),
+    path('dashboard/parents/', views.getParents, name='parents_headteacher'),
+      
 ]

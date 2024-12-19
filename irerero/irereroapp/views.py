@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 from .forms import ClassForm
 from django.utils import timezone
+from django.db.models.functions import TruncMonth
+from django.db.models import Count
 def login_required(function):
     def wrapper(request, *args, **kwargs):
         if 'user_id' not in request.session:
@@ -301,7 +303,69 @@ def homepage(request):
     return render(request, 'irereroapp/homepage.html')
 
 
+
 def AdminDashboard(request):
-    return render(request, 'irereroapp/adminDashboard.html')
+    # Total counts
+    total_parents = User.objects.filter(role='Parent').count()
+    total_teachers = User.objects.filter(role='Teacher').count()
+    total_headteachers = User.objects.filter(role='Headteacher').count()
+    total_users = User.objects.count()  # Total users regardless of role
+    total_children = child.objects.count()
+    total_schools = School.objects.count()
+    total_classes = Class.objects.count()
 
+    # Users created per month
+    users_per_month = (
+        User.objects.annotate(month=TruncMonth('created_at'))
+        .values('month')
+        .annotate(total=Count('userID'))  # Use userID instead of id
+        .order_by('month')
+    )
 
+    # Parents created per month
+    parents_per_month = (
+        User.objects.filter(role='Parent')
+        .annotate(month=TruncMonth('created_at'))
+        .values('month')
+        .annotate(total=Count('userID'))  # Use userID instead of id
+        .order_by('month')
+    )
+
+    # Fetch recent children (you can adjust the number based on your needs)
+    recent_children = child.objects.all().order_by('-Dob')[:7]  # Fetch the latest 7 children
+
+    # Convert queryset data to JSON format for Chart.js
+    graph_data = {
+        "users_per_month": list(users_per_month),
+        "parents_per_month": list(parents_per_month),
+    }
+
+    context = {
+        'total_users': total_users,
+        'total_children': total_children,
+        'total_schools': total_schools,
+        'total_teachers': total_teachers,
+        'total_classes': total_classes,
+        'total_parents': total_parents,
+        'total_headteachers': total_headteachers,
+        'recent_children': recent_children,  # Pass the recent children data
+    }
+
+    return render(request, 'irereroapp/adminDashboard.html', context)
+
+def getAllClasses(request):
+    classes = Class.objects.all()
+    return render(request, 'irereroapp/adminClassDashboard.html', {'classes': classes})
+def getChildren(request):
+    children = child.objects.all()
+    return render(request, 'irereroapp/adminChildrenDashboard.html', {'children': children})
+def getParents(request):
+    parents = User.objects.filter(role='Parent')
+    return render(request, 'irereroapp/adminParentsDashboard.html', {'parents': parents})
+
+def getTeachers(request):
+    teachers = User.objects.filter(role='Teacher')
+    return render(request, 'irereroapp/adminTeachersDashboard.html', {'teachers': teachers})
+
+    
+    
